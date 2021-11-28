@@ -88,7 +88,6 @@ def Water(file_path):
     #print(unpad(cryptor.decrypt(meta_data)).decode('utf-8'))
     meta_data = unpad(cryptor.decrypt(meta_data)).decode('utf-8')[6:]
     meta_data = json.loads(meta_data)
-    print (meta_data)
     crc32 = fi.read(4)
     crc32 = struct.unpack('<I', bytes(crc32))[0]
     fi.seek(5, 1)
@@ -103,7 +102,8 @@ def Water(file_path):
     if os.path.exists(file_name):
         print("'%s' already exists, skipped." % file_name)
         return file_name 
-
+    print (meta_data)
+    
     # use a temp file for write
     temp_file = "_ncmdump.tmp"
     #new_file = os.path.join(os.path.split(file_path)[0], file_name)
@@ -159,7 +159,7 @@ def Fire():
     for fpath in os.listdir('.'):
         ext = os.path.splitext(fpath)[-1]
         if ext == ".ncm":
-            print("Decoding '%s' ..." % fpath)
+            #print("Decoding '%s' ..." % fpath)
             Water(fpath)
 
 if __name__ == '__main__':
